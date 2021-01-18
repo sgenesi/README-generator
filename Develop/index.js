@@ -3,6 +3,7 @@ const fs = require('fs');
 const util = require('util');
 const inquirer = require('inquirer');
 const generateMarkdown = require('./utils/generateMarkdown');
+const { resolve } = require('path');
 
 // TODO: Create an array of questions for user input
 const promptUser = () => {
@@ -80,7 +81,7 @@ const promptUser = () => {
         {
             type: 'list',
             name: 'license',
-            message: 'Choose the appropiate license for your project:';
+            message: 'Choose the appropiate license for your project:',
             choices: [
                 "GNU",
                 "Apache",
@@ -126,7 +127,20 @@ const promptUser = () => {
 };
 
 // TODO: Create a function to write README file
-function writeToFile(name, data) { }
+function writeToFile(name, data) {
+    return new Promise((resolve, reject) => {
+        fs.writeToFile('./utils/generateMarkdown.js', data, err => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve({
+                ok: true,
+                message: 'File created!'
+            });
+        });
+    });
+};
 
 // TODO: Create a function to initialize app
 function init() { }

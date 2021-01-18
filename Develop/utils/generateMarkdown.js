@@ -15,6 +15,8 @@ function generateMarkdown(data) {
   return `
   <h1 align="center">${data.projectTitle}</h1>
 
+  ![badge](https://img.shields.io/badge/license-${data.license}-blueviolet)<br />
+
   ## Description
   ${data.description}
 
@@ -40,6 +42,7 @@ function generateMarkdown(data) {
   ${data.test}
 
   ## License
+  ![badge](https://img.shields.io/badge/license-${data.license}-blueviolet)<br />
   This application is covered by the ${data.license} license.
 
   ## Questions
