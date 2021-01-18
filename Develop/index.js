@@ -1,13 +1,16 @@
 // TODO: Include packages needed for this application
+const fs = require('fs');
+const util = require('util');
 const inquirer = require('inquirer');
+const generateMarkdown = require('./utils/generateMarkdown');
 
 // TODO: Create an array of questions for user input
-const questions = () => {
+const promptUser = () => {
     return inquirer.prompt([
         {
             type: 'input',
             name: 'projectTitle',
-            message: 'Enter the title of your project. (Required)',
+            message: 'What is the project title? (Required)',
             validate: titleInput => {
                 if (titleInput) {
                     return true;
@@ -20,7 +23,7 @@ const questions = () => {
         {
             type: 'input',
             name: 'description',
-            message: 'Enter a description of your project. (Required)',
+            message: 'Enter a short description of your project. (Required)',
             validate: descriptionInput => {
                 if (descriptionInput) {
                     return true;
@@ -33,20 +36,12 @@ const questions = () => {
         {
             type: 'input',
             name: 'installation',
-            message: 'Enter installation instructions for your project. (Required)',
-            validate: installationInput => {
-                if (installationInput) {
-                    return true;
-                } else {
-                    console.log('Please enter installation instructions for your project!');
-                    return false;
-                }
-            }
+            message: 'Enter any installation instructions for your project.',
         },
         {
             type: 'input',
             name: 'usage',
-            message: 'Enter information on how your project should be used. (Required)',
+            message: 'How should your project be used? (Required)',
             validate: usageInput => {
                 if (usageInput) {
                     return true;
@@ -60,8 +55,8 @@ const questions = () => {
             type: 'input',
             name: 'contribute',
             message: 'Enter guidelines on how others can contribute to your project. (Required)',
-            validate: contributionInput => {
-                if (contributionInput) {
+            validate: contributeInput => {
+                if (contributeInput) {
                     return true;
                 } else {
                     console.log('Please enter guidelines for contributions.');
@@ -71,17 +66,62 @@ const questions = () => {
         },
         {
             type: 'input',
-            name: 'testing',
+            name: 'test',
             message: 'Enter instructions for testing your project. (Required)',
-            validate: testingInput => {
-                if (testingInput) {
+            validate: testInput => {
+                if (testInput) {
                     return true;
                 } else {
                     console.log('Please enter instructions for testing!');
                     return false;
                 }
             }
-        }
+        },
+        {
+            type: 'list',
+            name: 'license',
+            message: 'Choose the appropiate license for your project:';
+            choices: [
+                "GNU",
+                "Apache",
+                "Ms-Pl",
+                "BSD",
+                "CDDL",
+                "EPL",
+                "MIT"
+            ]
+        },
+        {
+            type: 'input',
+            name: 'questions',
+            message: 'What do I do if I have an issue?',
+        },
+        {
+            type: 'input',
+            name: 'username',
+            message: 'What is your GitHub username? (Required)',
+            validate: usernameInput => {
+                if (usernameInput) {
+                    return true;
+                } else {
+                    console.log('Please enter your GitHub username!');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: 'What is your email address? (Required)',
+            validate: emailInput => {
+                if (emailInput) {
+                    return true;
+                } else {
+                    console.log('Please enter your email address!');
+                    return false;
+                }
+            }
+        },
     ]);
 };
 
