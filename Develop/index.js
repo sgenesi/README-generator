@@ -82,15 +82,7 @@ const promptUser = () => {
             type: 'list',
             name: 'license',
             message: 'Choose the appropiate license for your project:',
-            choices: [
-                "GNU",
-                "Apache",
-                "Ms-Pl",
-                "BSD",
-                "CDDL",
-                "EPL",
-                "MIT"
-            ]
+            choices: ['GNU', 'Apache', 'Ms-PL', 'BSD', 'CDDL', 'EPL', 'MIT']
         },
         {
             type: 'input',
