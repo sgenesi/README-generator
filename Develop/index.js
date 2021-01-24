@@ -1,7 +1,7 @@
 // TODO: Include packages needed for this application
 const fs = require('fs');
 const inquirer = require('inquirer');
-const generateMarkdown = require('./utils/generateMarkdown');
+const generateMarkdown = require('./utils/generateMarkdown.js');
 const util = require('util');
 
 // TODO: Create an array of questions for user input
@@ -118,8 +118,8 @@ const promptUser = () => {
 };
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {
-    fs.writeFile(fileName, data, err => {
+function writeToFile(fileName, userResponses) {
+    fs.writeFile(fileName, userResponses, err => {
         if (err) {
             return console.log(err);
         }
@@ -137,15 +137,11 @@ async function init() {
         // Prompt Inquirer questions
         const userResponses = await inquirer.prompt(questions);
         console.log("Your responses: ", userResponses);
-        console.log("Thank you for your responses! Fetching your GitHub data next...");
-
-        // Call GitHub api for user info
-        const userInfo = await api.getUser(userResponses);
-        console.log("Your GitHub user info: ", userInfo);
+        console.log("Thank you for your responses!");
 
         // Pass Inquirer userResponses and GitHub userInfo to generateMarkdown
         console.log("Generating your README next...")
-        const markdown = generateMarkdown(userResponses, userInfo);
+        const markdown = generateMarkdown(userResponses);
         console.log(markdown);
 
         // Write markdown to file
@@ -159,4 +155,3 @@ async function init() {
 // Function call to initialize app
 init();
 
-// promptUser().then(data => console.log(data));

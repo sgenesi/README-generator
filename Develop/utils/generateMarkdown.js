@@ -7,7 +7,7 @@ const renderLicenseBadge = license => {
   }
 
   return `
-  ![badge](https://img.shields.io/badge/license-${data.license}-blueviolet)
+  ![badge](https://img.shields.io/badge/license-${userResponses.license}-blueviolet)
   `;
 };
 
@@ -42,51 +42,102 @@ function renderLicenseLink(license) {
 
     return `
   ## License
-  ![badge](https://img.shields.io/badge/license-${data.license}-blueviolet)<br />
-  This application is covered by the ${data.license} license.
+  ![badge](https://img.shields.io/badge/license-${userResponses.license}-blueviolet)<br />
+  This application is covered by the ${userResponses.license} license.
   `;
   };
 
   // TODO: Create a function to generate markdown for README
-  function generateMarkdown(data) {
-    return `# ${data.projectTitle}
+  function generateMarkdown(userResponses) {
 
+    let draftTOC = `## Table of Contents`;
+
+    if (userResponses.installation !== '') { draftTOC += ` * [Installation](#installation)` };
+
+    if (userResponses.usage !== '') { draftToC += ` * [Usage](#usage)` };
+
+    if (userResponses.contribute !== '') { draftTOC += ` * [Contribute](#contribute)` };
+
+    if (userResponses.test !== '') { draftTOC += ` * [Test](#test)` };
+
+    let draftMarkdown =
+      `# ${userResponses.title}
   ${renderLicenseBadge(license)}
+  
+  ## Description 
+  
+  ${userResponses.description}`
 
-  ## Description
-  ${data.description}
+    // Add Table of Contents
+    draftMarkdown += draftToC;
 
-  ## Table of Contents
-  - [Description](#description)
-  - [Installation](#installation)
-  - [Usage](#usage)
-  - [Contribute](#contribute)
-  - [Test](#test)
-  - [Question](#questions)
-  - [License](#license)
+    // Add License section 
+    draftMarkdown += `
+  ${renderLicenseSection(license)}`;
 
-  ## Installation
-  ${data.installation}
+    // Add installation section if applicable
+    if (userResponses.installation !== '') {
 
-  ## Usage
-  ${data.usage}
+      draftMarkdown +=
+        `
+    
+    ## Installation
+    
+    ${userResponses.installation}`
+    };
 
-  ## Contribute
-  ${data.contribute}
+    // Add usage section if applicable
+    if (userResponses.usage !== '') {
 
-  ## Test
-  ${data.test}
+      draftMarkdown +=
 
-  ## Questions
-  ${data.questions}<br />
-  <br />
-  Find me on GitHub: [${data.username}](https://github.com/${data.username})<br />
-  <br />
-  Email me with any questions: ${data.email}<br /><br />
+        `
+    
+    ## Usage 
+    
+    ${userResponses.usage}`
+    };
 
-  ${renderLicenseSection(license)}
-  ${renderLicenseLink(license)}
-`;
+    // Add contribute section if applicable
+    if (userResponses.contribute !== '') {
+      `
+    
+    ## Contributing
+    
+    ${userResponses.contributing}`
+    };
+
+    // Add test section if applicable
+    if (userResponses.test !== '') {
+
+      draftMarkdown +=
+        `
+    
+    ## Tests
+    
+    ${userResponses.tests}`
+    };
+
+    // Questions section
+    let draftDev =
+      `
+  ---
+  
+  ## Questions?
+  
+  If you have questions, please feel free to contact me:
+ 
+  GitHub: ${userResponses.username}
+  `;
+
+    if (userInfo.email !== null) {
+
+      draftDev +=
+        `
+  Email: ${userResponses.email}
+  `};
+
+    return draftMarkdown;
   }
 };
 
