@@ -1,9 +1,10 @@
 
-   README.md Generator 
-
+# Professional README.md Generator 
+   
+   ![badge](https://img.shields.io/badge/license-GNU-blueviolet)
 
 ## Description
-This is a command line application that takes user input and generates a professional README.md
+This is a command line application that takes user input and then generates a professional README.md file.
 
 ---
 ## Table of Contents
@@ -17,11 +18,11 @@ This is a command line application that takes user input and generates a profess
 
 ---
 ## Installation
- *Install node.js: https://nodejs.org/en/download/  *Install inquirer.js: npm install inquirer 
+ node.js and inquirer.js
 
  ---
 ## Usage
-To generate professional README.md's
+To create professional README.md's
 
 ---
 ## License
@@ -30,7 +31,7 @@ To generate professional README.md's
 
 ---
 ## Contribute
-sad
+
 
  ---
 ## Tests
@@ -38,9 +39,9 @@ undefined
 
 ---
 ## Questions
-If you have any questions, feel free to contact me:
+If you have any quesitons, please feel free to contact me:
 
 GitHub: [sgenesi](https://github.com/sgenesi)
 
-Email: sgenes@hotmail.com
+Email: sgenes@hotmal.com
     

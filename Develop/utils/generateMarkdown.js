@@ -38,8 +38,8 @@ ${data.usage}
 ${data.contribute}
 
  ---
-## Tests
-${data.tests}
+## Test
+${data.test}
 
 ---
 ## Questions
