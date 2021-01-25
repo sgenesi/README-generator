@@ -1,144 +1,54 @@
 const fs = require('fs');
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
-const renderLicenseBadge = license => {
-  if (!license) {
-    return '';
-  }
 
+// TODO: Create a function to generate markdown for README
+function generateMarkdown(data) {
   return `
-  ![badge](https://img.shields.io/badge/license-${userResponses.license}-blueviolet)
-  `;
-};
+   # ${data.projectTitle} 
+   
+   ![badge](https://img.shields.io/badge/license-${data.license}-blueviolet)
 
+## Description
+${data.description}
 
-// TODO: Create a function that returns the license link
-// If there is no license, return an empty string
-function renderLicenseLink(license) {
-  if (license == GNU) {
-    return 'https://www.gnu.org/licenses/licenses.en.html#GPL';
-  } else if (license == Apache) {
-    return 'https://www.apache.org/licenses/LICENSE-2.0';
-  } else if (license == Ms - PL) {
-    return 'https://opensource.org/licenses/MS-PL';
-  } else if (license == BSD) {
-    return 'https://opensource.org/licenses/BSD-2-Clause';
-  } else if (license == CDDL) {
-    return 'https://opensource.org/licenses/CDDL-1.0';
-  } else if (license == EPL) {
-    return 'https://www.eclipse.org/legal/epl-v10.html';
-  } else if (license == MIT) {
-    return 'https://opensource.org/licenses/MIT';
-  } else {
-    return '';
-  };
+---
+## Table of Contents
+- [Description](#description)
+- [Installation](#installation)
+- [Usage](#usage)
+- [License](#license)
+- [Contribute](#contribute)
+- [Tests](#tests)
+- [Questions](#questions)
 
-  // TODO: Create a function that returns the license section of README
-  // If there is no license, return an empty string
-  const renderLicenseSection = license => {
-    if (!license) {
-      return '';
-    }
+---
+## Installation
+ ${data.installation}
 
-    return `
-  ## License
-  ![badge](https://img.shields.io/badge/license-${userResponses.license}-blueviolet)<br />
-  This application is covered by the ${userResponses.license} license.
-  `;
-  };
+ ---
+## Usage
+${data.usage}
 
-  // TODO: Create a function to generate markdown for README
-  function generateMarkdown(userResponses) {
+---
+## License
 
-    let draftTOC = `## Table of Contents`;
+![badge](https://img.shields.io/badge/license-${data.license}-blueviolet)
 
-    if (userResponses.installation !== '') { draftTOC += ` * [Installation](#installation)` };
+---
+## Contribute
+${data.contribute}
 
-    if (userResponses.usage !== '') { draftToC += ` * [Usage](#usage)` };
+ ---
+## Tests
+${data.tests}
 
-    if (userResponses.contribute !== '') { draftTOC += ` * [Contribute](#contribute)` };
+---
+## Questions
+${data.questions}
 
-    if (userResponses.test !== '') { draftTOC += ` * [Test](#test)` };
+GitHub: [${data.username}](https://github.com/${data.username})
 
-    let draftMarkdown =
-      `# ${userResponses.title}
-  ${renderLicenseBadge(license)}
-  
-  ## Description 
-  
-  ${userResponses.description}`
-
-    // Add Table of Contents
-    draftMarkdown += draftToC;
-
-    // Add License section 
-    draftMarkdown += `
-  ${renderLicenseSection(license)}`;
-
-    // Add installation section if applicable
-    if (userResponses.installation !== '') {
-
-      draftMarkdown +=
-        `
-    
-    ## Installation
-    
-    ${userResponses.installation}`
-    };
-
-    // Add usage section if applicable
-    if (userResponses.usage !== '') {
-
-      draftMarkdown +=
-
-        `
-    
-    ## Usage 
-    
-    ${userResponses.usage}`
-    };
-
-    // Add contribute section if applicable
-    if (userResponses.contribute !== '') {
-      `
-    
-    ## Contributing
-    
-    ${userResponses.contributing}`
-    };
-
-    // Add test section if applicable
-    if (userResponses.test !== '') {
-
-      draftMarkdown +=
-        `
-    
-    ## Tests
-    
-    ${userResponses.tests}`
-    };
-
-    // Questions section
-    let draftDev =
-      `
-  ---
-  
-  ## Questions?
-  
-  If you have questions, please feel free to contact me:
- 
-  GitHub: ${userResponses.username}
-  `;
-
-    if (userInfo.email !== null) {
-
-      draftDev +=
-        `
-  Email: ${userResponses.email}
-  `};
-
-    return draftMarkdown;
-  }
-};
+Email: ${data.email}
+    `;
+}
 
 module.exports = generateMarkdown;
